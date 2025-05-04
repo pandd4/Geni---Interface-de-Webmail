@@ -2,6 +2,8 @@
 
 Este projeto é uma simulação de uma interface de cliente de e-mail inspirada em plataformas modernas. Desenvolvido com **HTML** e **CSS**, ele apresenta uma visualização limpa e organizada de uma caixa de entrada de e-mails, com suporte a categorias e leitura de mensagens.
 
+https://photos.app.goo.gl/eKMz4mSoJdyRYgPF9
+
   ## Funcionalidades
 
 * Layout responsivo baseado em Flexbox.
