@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geni - Webmail</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      height: 100vh;
+      color: #2D2F33;
+    }
+    aside {
+      width: 220px;
+      background: #F7F8FA;
+      padding: 20px;
+      border-right: 1px solid #DDD;
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    .btn-novo {
+      display: block;
+      width: 100%;
+      background: #5B3DF5;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .menu h4 {
+      font-size: 14px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+    .menu ul {
+      list-style: none;
+    }
+    .menu li {
+      padding: 8px 0;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .menu li.active {
+      font-weight: bold;
+      color: #5B3DF5;
+    }
+    main {
+      flex: 1;
+      display: flex;
+    }
+    .inbox {
+      width: 300px;
+      border-right: 1px solid #EEE;
+      padding: 20px;
+    }
+    .email-item {
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .email-item h4 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .email-item p {
+      font-size: 12px;
+      color: #555;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      margin-top: 4px;
+    }
+    .tag.trabalho { background: #F0EBFF; color: #5B3DF5; }
+    .tag.urgente { background: #FFE2E2; color: #D32F2F; }
+    .tag.social { background: #FFF0CC; color: #F57C00; }
+
+    .email-viewer {
+      flex: 1;
+      padding: 20px;
+    }
+    .email-viewer h2 {
+      margin-bottom: 10px;
+    }
+    .email-viewer .meta {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .email-viewer p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .email-viewer .actions button {
+      margin-right: 10px;
+      background: #5B3DF5;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <div class="logo">⚡ Geni</div>
+    <button class="btn-novo">+ Novo E-mail</button>
+    <div class="menu">
+      <ul>
+        <li class="active">Caixa de Entrada</li>
+        <li>Importantes</li>
+        <li>Agendados</li>
+        <li>Enviados</li>
+        <li>Lixeira</li>
+      </ul>
+      <h4>CATEGORIAS</h4>
+      <ul>
+        <li>Trabalho</li>
+        <li>Pessoal</li>
+        <li>Finanças</li>
+        <li>Social</li>
+      </ul>
+    </div>
+    <div style="position:absolute; bottom: 20px; font-size: 12px; color: #555;">
+      Ana Silva<br>ana.silva@gmail.com
+    </div>
+  </aside>
+
+  <main>
+    <div class="inbox">
+      <div class="email-item">
+        <h4>Reunião de Projeto</h4>
+        <p>Carlos Mendes</p>
+        <span class="tag trabalho">Trabalho</span>
+        <span class="tag urgente">Urgente</span>
+      </div>
+      <div class="email-item">
+        <h4>Fatura de Energia</h4>
+        <p>Energia Luz S.A.</p>
+        <span class="tag finanças">Finanças</span>
+      </div>
+      <div class="email-item">
+        <h4>Convite para Evento</h4>
+        <p>Mariana Costa</p>
+        <span class="tag social">Social</span>
+      </div>
+    </div>
+
+    <div class="email-viewer">
+      <h2>Reunião de Projeto</h2>
+      <div class="meta">
+        <strong>Carlos Mendes</strong> &lt;carlos.mendes@genprojetos.com&gt;<br>
+        Hoje, 10:30
+      </div>
+      <p>Olá Ana,</p>
+      <p>Gostaria de confirmar nossa reunião de hoje às 14h para discutirmos os próximos passos do projeto.</p>
+      <p>Precisamos revisar os resultados da última sprint e definir as prioridades para a próxima semana. Você poderia trazer os relatórios de desempenho?</p>
+      <p>Também será importante discutirmos o feedback dos clientes sobre a última entrega e como podemos melhorar alguns pontos que foram levantados.</p>
+      <p>A reunião será na sala de conferências principal e terá duração de aproximadamente 1 hora.</p>
+      <p>Por favor, confirme sua presença.</p>
+      <p>Atenciosamente,<br>Carlos Mendes<br>Gerente de Projetos</p>
+      <div class="actions">
+        <button>Responder</button>
+        <button>Agendar</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
