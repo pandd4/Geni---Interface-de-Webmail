@@ -1,180 +1,123 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geni - Webmail</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geni - Assistente de E-mail</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      height: 100vh;
-      color: #2D2F33;
-    }
-    aside {
-      width: 220px;
-      background: #F7F8FA;
-      padding: 20px;
-      border-right: 1px solid #DDD;
-    }
-    .logo {
-      font-weight: bold;
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
-    .btn-novo {
-      display: block;
-      width: 100%;
-      background: #5B3DF5;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .menu h4 {
-      font-size: 14px;
-      margin-top: 20px;
-      margin-bottom: 8px;
-    }
-    .menu ul {
-      list-style: none;
-    }
-    .menu li {
-      padding: 8px 0;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .menu li.active {
-      font-weight: bold;
-      color: #5B3DF5;
-    }
-    main {
-      flex: 1;
-      display: flex;
-    }
-    .inbox {
-      width: 300px;
-      border-right: 1px solid #EEE;
-      padding: 20px;
-    }
-    .email-item {
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-    .email-item h4 {
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-    .email-item p {
-      font-size: 12px;
-      color: #555;
-    }
-    .tag {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      margin-top: 4px;
-    }
-    .tag.trabalho { background: #F0EBFF; color: #5B3DF5; }
-    .tag.urgente { background: #FFE2E2; color: #D32F2F; }
-    .tag.social { background: #FFF0CC; color: #F57C00; }
-
-    .email-viewer {
-      flex: 1;
-      padding: 20px;
-    }
-    .email-viewer h2 {
-      margin-bottom: 10px;
-    }
-    .email-viewer .meta {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 20px;
-    }
-    .email-viewer p {
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }
-    .email-viewer .actions button {
-      margin-right: 10px;
-      background: #5B3DF5;
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+    body { font-family: 'Inter', sans-serif; }
   </style>
 </head>
-<body>
-  <aside>
-    <div class="logo">⚡ Geni</div>
-    <button class="btn-novo">+ Novo E-mail</button>
-    <div class="menu">
-      <ul>
-        <li class="active">Caixa de Entrada</li>
-        <li>Importantes</li>
-        <li>Agendados</li>
-        <li>Enviados</li>
-        <li>Lixeira</li>
-      </ul>
-      <h4>CATEGORIAS</h4>
-      <ul>
-        <li>Trabalho</li>
-        <li>Pessoal</li>
-        <li>Finanças</li>
-        <li>Social</li>
-      </ul>
-    </div>
-    <div style="position:absolute; bottom: 20px; font-size: 12px; color: #555;">
-      Ana Silva<br>ana.silva@gmail.com
-    </div>
-  </aside>
+<body class="bg-gray-50 text-gray-800">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 p-4 flex flex-col">
+      <div class="flex items-center space-x-2 mb-6">
+        <div class="bg-indigo-600 text-white p-2 rounded-full">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        <span class="text-xl font-semibold">Geni</span>
+      </div>
 
-  <main>
-    <div class="inbox">
-      <div class="email-item">
-        <h4>Reunião de Projeto</h4>
-        <p>Carlos Mendes</p>
-        <span class="tag trabalho">Trabalho</span>
-        <span class="tag urgente">Urgente</span>
-      </div>
-      <div class="email-item">
-        <h4>Fatura de Energia</h4>
-        <p>Energia Luz S.A.</p>
-        <span class="tag finanças">Finanças</span>
-      </div>
-      <div class="email-item">
-        <h4>Convite para Evento</h4>
-        <p>Mariana Costa</p>
-        <span class="tag social">Social</span>
-      </div>
-    </div>
+      <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium mb-6 hover:bg-indigo-700">
+        + Novo E-mail
+      </button>
 
-    <div class="email-viewer">
-      <h2>Reunião de Projeto</h2>
-      <div class="meta">
-        <strong>Carlos Mendes</strong> &lt;carlos.mendes@genprojetos.com&gt;<br>
-        Hoje, 10:30
+      <nav class="flex-1">
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-100 font-medium">Caixa de Entrada <span class="bg-indigo-600 text-white rounded-full px-2">3</span></a></li>
+          <li><a href="#" class="block px-3 py-2 hover:bg-gray-100 rounded-lg">Importantes</a></li>
+          <li><a href="#" class="block px-3 py-2 hover:bg-gray-100 rounded-lg">Agendados</a></li>
+          <li><a href="#" class="block px-3 py-2 hover:bg-gray-100 rounded-lg">Enviados</a></li>
+          <li><a href="#" class="block px-3 py-2 hover:bg-gray-100 rounded-lg">Lixeira</a></li>
+        </ul>
+
+        <div class="mt-8">
+          <p class="text-xs text-gray-500 uppercase mb-2 font-semibold">Categorias</p>
+          <ul class="space-y-1 text-sm">
+            <li><span class="inline-block w-2 h-2 rounded-full bg-indigo-500 mr-2"></span>Trabalho</li>
+            <li><span class="inline-block w-2 h-2 rounded-full bg-yellow-500 mr-2"></span>Pessoal</li>
+            <li><span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Finanças</li>
+            <li><span class="inline-block w-2 h-2 rounded-full bg-pink-500 mr-2"></span>Social</li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="mt-auto flex items-center space-x-2 pt-6 border-t">
+        <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+        <div>
+          <p class="text-sm font-medium">Amanda</p>
+          <p class="text-xs text-gray-500">a037899@gmail.com</p>
+        </div>
       </div>
-      <p>Olá Ana,</p>
-      <p>Gostaria de confirmar nossa reunião de hoje às 14h para discutirmos os próximos passos do projeto.</p>
-      <p>Precisamos revisar os resultados da última sprint e definir as prioridades para a próxima semana. Você poderia trazer os relatórios de desempenho?</p>
-      <p>Também será importante discutirmos o feedback dos clientes sobre a última entrega e como podemos melhorar alguns pontos que foram levantados.</p>
-      <p>A reunião será na sala de conferências principal e terá duração de aproximadamente 1 hora.</p>
-      <p>Por favor, confirme sua presença.</p>
-      <p>Atenciosamente,<br>Carlos Mendes<br>Gerente de Projetos</p>
-      <div class="actions">
-        <button>Responder</button>
-        <button>Agendar</button>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 flex overflow-hidden">
+      <!-- Email list -->
+      <div class="w-1/3 bg-white border-r border-gray-200 p-4 overflow-y-auto">
+        <div class="flex items-center mb-4">
+          <input type="text" placeholder="Pesquisar e-mails..." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" />
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-indigo-50 p-3 rounded-lg border-l-4 border-indigo-600 cursor-pointer">
+            <p class="text-sm font-medium">Reunião de Projeto</p>
+            <p class="text-xs text-gray-500">Carlos Mendes - 10:30</p>
+            <div class="flex space-x-2 mt-1 text-xs">
+              <span class="bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded">Trabalho</span>
+              <span class="bg-red-200 text-red-800 px-2 py-0.5 rounded">Urgente</span>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
+            <p class="text-sm font-medium">Fatura de Energia</p>
+            <p class="text-xs text-gray-500">Energia Luz S.A. - Ontem</p>
+            <span class="bg-green-200 text-green-800 px-2 py-0.5 text-xs rounded">Finanças</span>
+          </div>
+
+          <div class="p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
+            <p class="text-sm font-medium">Convite para Evento</p>
+            <p class="text-xs text-gray-500">Mariana Costa - 12 Jan</p>
+            <span class="bg-yellow-200 text-yellow-800 px-2 py-0.5 text-xs rounded">Social</span>
+          </div>
+        </div>
       </div>
-    </div>
-  </main>
+
+      <!-- Email view -->
+      <div class="flex-1 p-6 overflow-y-auto">
+        <h2 class="text-xl font-semibold mb-2">Reunião de Projeto</h2>
+        <div class="flex items-center space-x-2 text-sm text-gray-600 mb-4">
+          <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+          <div>
+            <p class="font-medium">Carlos Mendes</p>
+            <p class="text-xs">carlos.mendes@empresa.com</p>
+          </div>
+          <span class="ml-auto text-xs">Hoje, 10:30</span>
+        </div>
+
+        <div class="text-sm space-y-4">
+          <p>Olá Amanda,</p>
+          <p>Gostaria de confirmar nossa reunião de hoje às 14h para discutirmos os próximos passos do projeto.</p>
+          <p>Precisamos revisar os resultados da última sprint e definir as prioridades para a próxima semana. Você poderá trazer os relatórios de desempenho?</p>
+          <p>Também seria importante discutirmos o feedback dos clientes sobre a última entrega e como podemos melhorar alguns pontos que foram levantados.</p>
+          <p>A reunião será na sala de conferências principal e terá duração de aproximadamente 1 hora.</p>
+          <p>Por favor, confirme sua presença.</p>
+          <p>Atenciosamente,<br/>Carlos Mendes<br/>Gerente de Projetos</p>
+        </div>
+
+        <div class="mt-6 flex space-x-3">
+          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Responder</button>
+          <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Agendar</button>
+        </div>
+      </div>
+    </main>
+  </div>
 </body>
 </html>
