@@ -3,121 +3,182 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Geni - Assistente de E-mail</title>
+  <title>Geni - Assistente de E-mail com IA</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    .email-item.unread {
+      font-weight: bold;
+      background-color: #f9fafb;
+    }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
-  <div class="flex h-screen">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-white border-r border-gray-200 p-4 flex flex-col">
-      <div class="flex items-center space-x-2 mb-6">
-        <div class="bg-indigo-600 text-white p-2 rounded-full">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-          </svg>
-        </div>
+<body class="flex h-screen bg-gray-50 text-gray-900">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white border-r flex flex-col justify-between">
+    <div>
+      <div class="flex items-center gap-2 p-4">
+        <div class="bg-violet-600 text-white rounded-full p-2 text-xl font-bold">⚡</div>
         <span class="text-xl font-semibold">Geni</span>
       </div>
-
-      <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium mb-6 hover:bg-indigo-700">
+      <button class="mx-4 my-2 bg-violet-600 text-white px-4 py-2 rounded-lg w-full text-sm font-medium">
         + Novo E-mail
       </button>
 
-      <nav class="flex-1">
-        <ul class="space-y-2 text-sm">
-          <li><a href="#" class="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-100 font-medium">Caixa de Entrada <span class="bg-indigo-600 text-white rounded-full px-2">3</span></a></li>
-          <li><a href="#" class="block px-3 py-2 hover:bg-gray-100 rounded-lg">Importantes</a></li>
-          <li><a href="#" class="block px-3 py-2 hover:bg-gray-100 rounded-lg">Agendados</a></li>
-          <li><a href="#" class="block px-3 py-2 hover:bg-gray-100 rounded-lg">Enviados</a></li>
-          <li><a href="#" class="block px-3 py-2 hover:bg-gray-100 rounded-lg">Lixeira</a></li>
-        </ul>
-
-        <div class="mt-8">
-          <p class="text-xs text-gray-500 uppercase mb-2 font-semibold">Categorias</p>
-          <ul class="space-y-1 text-sm">
-            <li><span class="inline-block w-2 h-2 rounded-full bg-indigo-500 mr-2"></span>Trabalho</li>
-            <li><span class="inline-block w-2 h-2 rounded-full bg-yellow-500 mr-2"></span>Pessoal</li>
-            <li><span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Finanças</li>
-            <li><span class="inline-block w-2 h-2 rounded-full bg-pink-500 mr-2"></span>Social</li>
-          </ul>
-        </div>
+      <nav class="px-4 mt-4 space-y-1">
+        <h3 class="text-xs text-gray-500 uppercase">Menu</h3>
+        <a href="#" class="p-2 rounded-lg hover:bg-gray-100 bg-gray-100 font-medium">📥 Caixa de Entrada</a>
       </nav>
 
-      <div class="mt-auto flex items-center space-x-2 pt-6 border-t">
-        <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
-        <div>
-          <p class="text-sm font-medium">Amanda</p>
-          <p class="text-xs text-gray-500">a037899@gmail.com</p>
-        </div>
+      <nav class="px-4 mt-6 space-y-1">
+        <h3 class="text-xs text-gray-500 uppercase">Categorias</h3>
+        <button onclick="filterEmails('all')" class="p-2 w-full text-left hover:bg-gray-100">📂 Todos</button>
+        <button onclick="filterEmails('Trabalho')" class="p-2 w-full text-left hover:bg-gray-100">🔵 Trabalho</button>
+        <button onclick="filterEmails('Pessoal')" class="p-2 w-full text-left hover:bg-gray-100">🔴 Pessoal</button>
+        <button onclick="filterEmails('Finanças')" class="p-2 w-full text-left hover:bg-gray-100">🟢 Finanças</button>
+        <button onclick="filterEmails('Social')" class="p-2 w-full text-left hover:bg-gray-100">🟡 Social</button>
+      </nav>
+    </div>
+    <div class="flex items-center gap-3 p-4 border-t">
+      <div class="bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold">A</div>
+      <div>
+        <p class="text-sm font-medium">Ana Silva</p>
+        <p class="text-xs text-gray-500">ana.silva@gmail.com</p>
       </div>
-    </aside>
+    </div>
+  </aside>
 
-    <!-- Main content -->
-    <main class="flex-1 flex overflow-hidden">
-      <!-- Email list -->
-      <div class="w-1/3 bg-white border-r border-gray-200 p-4 overflow-y-auto">
-        <div class="flex items-center mb-4">
-          <input type="text" placeholder="Pesquisar e-mails..." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" />
-        </div>
+  <!-- Main -->
+  <main class="flex-1 flex flex-col">
+    <!-- Header -->
+    <div class="p-4 border-b bg-white">
+      <input type="text" id="searchInput" placeholder="🔍 Pesquisar e-mails..." oninput="searchEmails(this.value)"
+        class="w-full md:w-1/2 p-2 border rounded-lg text-sm shadow-sm" />
+    </div>
 
-        <div class="space-y-4">
-          <div class="bg-indigo-50 p-3 rounded-lg border-l-4 border-indigo-600 cursor-pointer">
-            <p class="text-sm font-medium">Reunião de Projeto</p>
-            <p class="text-xs text-gray-500">Carlos Mendes - 10:30</p>
-            <div class="flex space-x-2 mt-1 text-xs">
-              <span class="bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded">Trabalho</span>
-              <span class="bg-red-200 text-red-800 px-2 py-0.5 rounded">Urgente</span>
-            </div>
+    <!-- Content -->
+    <div class="flex flex-1 overflow-hidden">
+      <!-- Lista de Emails -->
+      <section class="w-96 border-r overflow-y-auto bg-white" id="emailList">
+        <div class="p-4 border-b font-semibold text-lg bg-gray-50">Caixa de Entrada</div>
+        <ul class="divide-y" id="emails">
+          <!-- Renderizado via JS -->
+        </ul>
+      </section>
+
+      <!-- Visualização -->
+      <section class="flex-1 p-6 overflow-y-auto bg-gray-50" id="emailContent">
+        <h1 class="text-xl font-bold mb-2">Visualização de e-mail</h1>
+        <p class="text-gray-500">Selecione um e-mail à esquerda para ler.</p>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const emailData = [
+      {
+        category: "Trabalho",
+        title: "Reunião de Projeto",
+        sender: "Carlos Mendes",
+        time: "10:30",
+        body: `Olá Ana,\n\nGostaria de confirmar nossa reunião de hoje às 14h para discutirmos os próximos passos do projeto.`,
+        read: false,
+      },
+      {
+        category: "Finanças",
+        title: "Fatura de Energia",
+        sender: "Energia Luz S.A.",
+        time: "Ontem",
+        body: `Sua fatura do mês de junho (R$ 187,45) está disponível.`,
+        read: false,
+      },
+      {
+        category: "Pessoal",
+        title: "Confirmação de Compra",
+        sender: "Loja Online",
+        time: "12 Jan",
+        body: `Sua compra foi confirmada. Pedido #4451 será enviado em até 2 dias.`,
+        read: true,
+      },
+      {
+        category: "Social",
+        title: "Confraternização",
+        sender: "Faculdade",
+        time: "10 Jan",
+        body: `Estão todos convidados para a confraternização no sábado.`,
+        read: true,
+      },
+    ];
+
+    let currentEmails = [...emailData];
+
+    const emailList = document.getElementById("emails");
+    const emailContent = document.getElementById("emailContent");
+
+    function renderEmails(data) {
+      emailList.innerHTML = "";
+      data.forEach((email, index) => {
+        const li = document.createElement("li");
+        li.className = `email-item p-4 hover:bg-gray-100 cursor-pointer ${
+          email.read ? "" : "unread"
+        }`;
+        li.dataset.index = index;
+        li.innerHTML = `
+          <div class="flex justify-between text-sm">
+            <span class="font-semibold">${email.title}</span>
+            <span class="text-xs">${email.time}</span>
           </div>
+          <p class="text-xs text-gray-500">${email.sender}</p>
+          <p class="text-sm text-gray-700 truncate">${email.body}</p>
+          <span class="inline-block mt-1 px-2 py-0.5 text-xs text-white rounded-full ${
+            email.category === "Trabalho"
+              ? "bg-blue-500"
+              : email.category === "Pessoal"
+              ? "bg-red-500"
+              : email.category === "Finanças"
+              ? "bg-green-500"
+              : "bg-yellow-500"
+          }">${email.category}</span>
+        `;
+        li.addEventListener("click", () => {
+          showEmail(email);
+          email.read = true;
+          renderEmails(currentEmails);
+        });
+        emailList.appendChild(li);
+      });
+    }
 
-          <div class="p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
-            <p class="text-sm font-medium">Fatura de Energia</p>
-            <p class="text-xs text-gray-500">Energia Luz S.A. - Ontem</p>
-            <span class="bg-green-200 text-green-800 px-2 py-0.5 text-xs rounded">Finanças</span>
-          </div>
+    function showEmail(email) {
+      emailContent.innerHTML = `
+        <h2 class="text-2xl font-bold mb-1">${email.title}</h2>
+        <p class="text-sm text-gray-600">${email.sender} - ${email.time}</p>
+        <hr class="my-4" />
+        <pre class="whitespace-pre-wrap text-sm">${email.body}</pre>
+      `;
+    }
 
-          <div class="p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
-            <p class="text-sm font-medium">Convite para Evento</p>
-            <p class="text-xs text-gray-500">Mariana Costa - 12 Jan</p>
-            <span class="bg-yellow-200 text-yellow-800 px-2 py-0.5 text-xs rounded">Social</span>
-          </div>
-        </div>
-      </div>
+    function filterEmails(category) {
+      currentEmails =
+        category === "all"
+          ? [...emailData]
+          : emailData.filter((e) => e.category === category);
+      renderEmails(currentEmails);
+      emailContent.innerHTML = `<h1 class="text-xl font-bold mb-2">Visualização de e-mail</h1><p class="text-gray-500">Selecione um e-mail à esquerda para ler.</p>`;
+    }
 
-      <!-- Email view -->
-      <div class="flex-1 p-6 overflow-y-auto">
-        <h2 class="text-xl font-semibold mb-2">Reunião de Projeto</h2>
-        <div class="flex items-center space-x-2 text-sm text-gray-600 mb-4">
-          <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
-          <div>
-            <p class="font-medium">Carlos Mendes</p>
-            <p class="text-xs">carlos.mendes@empresa.com</p>
-          </div>
-          <span class="ml-auto text-xs">Hoje, 10:30</span>
-        </div>
+    function searchEmails(query) {
+      const results = currentEmails.filter(
+        (email) =>
+          email.title.toLowerCase().includes(query.toLowerCase()) ||
+          email.sender.toLowerCase().includes(query.toLowerCase()) ||
+          email.body.toLowerCase().includes(query.toLowerCase())
+      );
+      renderEmails(results);
+    }
 
-        <div class="text-sm space-y-4">
-          <p>Olá Amanda,</p>
-          <p>Gostaria de confirmar nossa reunião de hoje às 14h para discutirmos os próximos passos do projeto.</p>
-          <p>Precisamos revisar os resultados da última sprint e definir as prioridades para a próxima semana. Você poderá trazer os relatórios de desempenho?</p>
-          <p>Também seria importante discutirmos o feedback dos clientes sobre a última entrega e como podemos melhorar alguns pontos que foram levantados.</p>
-          <p>A reunião será na sala de conferências principal e terá duração de aproximadamente 1 hora.</p>
-          <p>Por favor, confirme sua presença.</p>
-          <p>Atenciosamente,<br/>Carlos Mendes<br/>Gerente de Projetos</p>
-        </div>
-
-        <div class="mt-6 flex space-x-3">
-          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Responder</button>
-          <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Agendar</button>
-        </div>
-      </div>
-    </main>
-  </div>
+    // Inicializar
+    renderEmails(currentEmails);
+  </script>
 </body>
 </html>
